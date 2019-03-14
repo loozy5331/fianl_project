@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clean Blog - Start Bootstrap Theme</title>
+  <title>{% block title %}Clean Blog - Start Bootstrap Theme{% endblock %}</title>
 
   <!-- Bootstrap core CSS -->
   <link href='{% static "vendor/bootstrap/css/bootstrap.css" %}' rel="stylesheet">
@@ -41,7 +41,7 @@
             <a class="nav-link" href="{% url 'main' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">MyPage</a>
+            <a class="nav-link" href="{% url 'mypage' %}">MyPage</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Login</a>
@@ -68,67 +68,9 @@
       </div>
     </div>
   </header>
+  {% block content %}
 
-  <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <!-- 21:9 aspect ratio -->    
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/v64KOxKVLVg"></iframe>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="#">
-            <h2 class="post-title">
-              모의고사로 쉽게 실전 대비 가능!
-            </h2>
-            <h3 class="post-subtitle">
-               여러 매체에서 얻은 질문들을 모아서 모의고사를 만들었다!!!
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="#">
-            <h2 class="post-title">
-              생각의 흐름 확인 가능!
-            </h2>
-            <h3 class="post-subtitle">
-                현재까지 바꿔온 과정과 그 떄의 생각을 한 눈에 확인 가능!!!
-              </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 18, 2019</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="#">
-            <h2 class="post-title">
-              합격자 들의 키워드!
-            </h2>
-            <h3 class="post-subtitle">
-              합격자들이 사용한 단어들을 3개 보여주어서 생각할 것을 제공해준다!
-          </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on August 24, 2019</p>
-        </div>
-        <hr>
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr>
+  {% endblock %}
 
   <!-- Footer -->
   <footer>
