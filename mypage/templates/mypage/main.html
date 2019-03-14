@@ -1,22 +1,2 @@
 {% extends 'index.html' %}
 
-{% block title %} index {% endblock %}
-
-{% block content %}
-    {% for mypage in mypages %}
-    {{mypage.name}}
-    <ul>
-        {% for question in mypage.question_set.all %}
-            <li>
-                <h3>{{question.question_title}}</h3>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <textarea class="form-control" rows="5" id="comment">{{question.question_text}}</textarea>
-                    </div>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
-    {% endfor %}
-{% endblock %}
