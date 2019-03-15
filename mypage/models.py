@@ -17,15 +17,15 @@ class MyPage(models.Model):
     univ_grad_date : 대학 졸업일
     """
     name = models.CharField(max_length=10)
-    age = models.IntegerField()
+    age = models.PositiveIntegerField(default=0)
     
-    high_school_name = models.CharField(max_length=30)
+    high_school_name = models.CharField(max_length=30, default="")
     high_adm_date = models.DateField()
     high_grad_date = models.DateField()
     
-    univ_name = models.CharField(max_length=30)
-    major_name = models.CharField(max_length=30)
-    sub_major_name = models.CharField(max_length=30)
+    univ_name = models.CharField(max_length=30, default="")
+    major_name = models.CharField(max_length=30, default="")
+    sub_major_name = models.CharField(max_length=30, default="")
     univ_adm_date = models.DateField()
     univ_grad_date = models.DateField()
 
