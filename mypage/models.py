@@ -34,11 +34,6 @@ class MyPage(models.Model):
         return "id : {}, name : {}, age : {}".format(self.id, self.name, self.age)
 
 class Question(models.Model):
-    """
-    myPage: 개인이 선택한 페이지
-    question_title: 질문
-    question_content: 질문에 대한 답변
-    """
     myPage = models.ForeignKey(MyPage, on_delete=models.CASCADE)
     question_title = models.CharField(max_length=200)
     question_text = models.TextField()
