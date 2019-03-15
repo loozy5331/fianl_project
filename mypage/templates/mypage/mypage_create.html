@@ -21,11 +21,12 @@
             <div class="clearfix">
                     <a class="btn btn-primary float-right" href="#">추가</a>
             </div>
-              {% for question in mypage %}
+              {% for question in mypage.question_set.all %}
               <div class="form-group">
                   <label for="inputAddress2">{{question.question_title}}</label>
-                  <textarea class="form-control" id="inputAddress2">{{question.question_text}}</textarea>
-              </div>
+                  <textarea class="form-control col-md-8" id="inputAddress2">{{question.question_text}}</textarea>
+                
+                </div>
               {% endfor %}
             <button type="submit" class="btn btn-primary">Sign in</button>
         </form>

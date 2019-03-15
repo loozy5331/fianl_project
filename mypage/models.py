@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings 
 from django.utils import timezone
+from django.urls import reverse
 
 class MyPage(models.Model):
     """
@@ -41,6 +42,11 @@ class Question(models.Model):
     myPage = models.ForeignKey(MyPage, on_delete=models.CASCADE)
     question_title = models.CharField(max_length=200)
     question_text = models.TextField()
+    #question_text_file = models.FileField(upload_to="question_log/{}".format(self.id))
+    question_text_num = models.PositiveIntegerField()
 
     def __str__(self):
         return self.question_title
+    
+    def get_absolute_url(self):
+        return reverse('mypage:detail', args=[str(self.id)])

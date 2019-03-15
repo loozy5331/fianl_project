@@ -4,8 +4,9 @@ from mypage import views
 app_name='mypage'
 
 urlpatterns = [
-    path('', views.main, name='main'),
-    path('mypage/', views.MyPageCreateView.as_view(), name='mypage'),
-    path('mypage/<int:mypage_id>', views.show_mypage, name='mypage_1'),
-
+    path('', views.show_main, name='main'),
+    path('create/', views.MyPageCreateView.as_view(), name='create'), # 개인 신상 정보
+    path('update/<int:pk>', views.QuestionUpdateView.as_view(), name='update'),
+    path('delete/<int:pk>', views.QuestionDeleteView.as_view(), name='delete'), # 개인이 선택한 질문들을 저장
+    
 ]
