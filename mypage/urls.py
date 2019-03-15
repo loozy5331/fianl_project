@@ -5,7 +5,7 @@ app_name='mypage'
 
 urlpatterns = [
     path('', views.main, name='main'),
-    path('mypage/', views.show_mypage, name='mypage'),
-    path('mypage/<int:mypage_id>', views.show_mypage, name='mypage'),
+    path('mypage/', views.MyPageCreateView.as_view(), name='mypage'),
+    path('mypage/<int:mypage_id>', views.show_mypage, name='mypage_1'),
 
 ]

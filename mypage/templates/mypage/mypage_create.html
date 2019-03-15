@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} MyPage {% endblock %}
+
+{% block content %}
+
+<div class="container">
+        <form action="{% url 'mypage:main' %}" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <hr>
+            <div class="form-group">
+                    <label for="inputState">질문 목록</label>
+                    <select id="inputState" class="form-control">
+                    <option selected>입사한 후에 할 일</option>
+                    <option>가장 인상 깊었던 프로젝트</option>
+                    <option>가장 영향을 미친 인물</option>
+                    <option>자신이 가장 창의적이었다고 생각하는 경험</option>
+                    </select>
+            </div>
+            <div class="clearfix">
+                    <a class="btn btn-primary float-right" href="#">추가</a>
+            </div>
+              {% for question in mypage %}
+              <div class="form-group">
+                  <label for="inputAddress2">{{question.question_title}}</label>
+                  <textarea class="form-control" id="inputAddress2">{{question.question_text}}</textarea>
+              </div>
+              {% endfor %}
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+</div>
+{% endblock %}
