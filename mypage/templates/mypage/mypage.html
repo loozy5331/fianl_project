@@ -5,6 +5,7 @@
 {% block content %}
 	<div class="container">
             <form>
+                    {% csrf_token %}
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Email</label>
@@ -48,24 +49,16 @@
                         </label>
                       </div>
                     </div>
+                    <hr>
+                    {% for mypage in mypages %}
+                        {% for question in mypage.question_set.all%}
+                        <div class="form-group">
+                            <label for="inputAddress2">{{question.question_title}}</label>
+                            <textarea class="form-control" id="inputAddress2">{{question.question_text}}</textarea>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
                     <button type="submit" class="btn btn-primary">Sign in</button>
-                  </form>
-        </div>
-    
-    {% for mypage in mypages %}
-    {{mypage.name}}
-    <ul>
-        {% for question in mypage.question_set.all %}
-            <li>
-                <h3>{{question.question_title}}</h3>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <textarea class="form-control" rows="5" id="comment">{{question.question_text}}</textarea>
-                    </div>
                 </form>
-            </li>
-        {% endfor %}
-    </ul>
-    {% endfor %}
+        </div>
 {% endblock %}
