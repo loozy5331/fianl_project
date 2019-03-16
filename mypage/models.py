@@ -17,6 +17,8 @@ class MyPage(models.Model):
     univ_adm_date : 대학 입학일
     univ_grad_date : 대학 졸업일
     """
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
     name = models.CharField(max_length=10)
     age = models.PositiveIntegerField(default=0)
     
@@ -48,7 +50,7 @@ class Question(models.Model):
         return reverse('mypage:detail', args=[str(self.id)])
 
 class Log(models.Model):
-    question = models.ForeignKey(Questrion, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     save_date = models.DateTimeField()
     log_message = models.CharField()
     log_text = models.TextField()
