@@ -35,6 +35,7 @@ class MyPage(models.Model):
 
 class Question(models.Model):
     myPage = models.ForeignKey(MyPage, on_delete=models.CASCADE)
+    user_id = models.CharField()
     question_title = models.CharField(max_length=200)
     question_text = models.TextField()
     #question_text_file = models.FileField(upload_to="question_log/{}".format(self.id))
@@ -45,3 +46,9 @@ class Question(models.Model):
     
     def get_absolute_url(self):
         return reverse('mypage:detail', args=[str(self.id)])
+
+class Log(models.Model):
+    question = models.ForeignKey(Questrion, on_delete=models.CASCADE)
+    save_date = models.DateTimeField()
+    log_message = models.CharField()
+    log_text = models.TextField()
