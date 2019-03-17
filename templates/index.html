@@ -47,7 +47,7 @@
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'mypage:create' %}">MyPage</a>
+            <a class="nav-link" href="{% url 'mypage:create' user.get_username %}">MyPage</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>

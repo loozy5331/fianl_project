@@ -7,6 +7,10 @@ from .models import Question, MyPage
 def show_main(request):
     return render(request, 'mypage/main.html')
 
+def createView(request, user_name):
+    myPage = MyPage.objects.get(user_name=user_name)
+    return render(request, 'mypage/mypage_create.html', {'myPage':myPage})
+
 class MyPageCreateView(CreateView):
     model = MyPage
     fields = ['name', 'age', 'high_school_name', 'high_adm_date', 'high_grad_date',
