@@ -7,65 +7,71 @@
 <div class="container">
     <div class="col-sm-8">
         <h4 class="page-header">개인 정보</h4>
-        <form action="{% url 'mypage:main' %}" method="post">
+        <form action="{% url 'mypage:create' user.get_username %}" method="post">
                 {% csrf_token %}
                 <div class="form-group float-label-control label-bottom">
-                    <label for="">이름</label>
-                    <input type="text" class="form-control" placeholder="Username">
-                    <label for="">나이</label>
-                    <input type="text" class="form-control" placeholder="Age">
-                    <label for="">고등학교</label>
-                    <input type="text" class="form-control" placeholder="High_school">
+                    <label>이름</label>
+                    <input name="name" type="text" class="form-control" placeholder="Username" {% if myPage %} value={{myPage.name}} {% endif %}>
+                    <label >나이</label>
+                    <input name="age" type="text" class="form-control" placeholder="Age" {% if myPage %} value={{myPage.age}} {% endif %}>
+                    <label>고등학교</label>
+                    <input name="high_school_name" type="text" class="form-control" placeholder="High_school" {% if myPage %} value={{myPage.high_school_name}} {% endif %}>
                     <div class="form-group">
                         <label for="expireDate" style="padding-right: 15px;">고등학교 입학, 졸업 기간 </label>
                         <div class="input-daterange date" id="datepicker1" style="width: 320px; display: inline-table;">
-                        <input type="text" class="form-control" id="sdate1" style="width: 115px;" />
+                        <input name="high_adm_date" type="text" class="form-control" id="sdate1" style="width: 115px;" {% if myPage %} value={{myPage.high_adm_date}} {% endif %}/>
                         <label class="date-range" for="sdate1">
                         <i class="glyphicon glyphicon-calendar"></i>
                         </label>
                         <span style="display: table-cell; padding: 0px 10px;"> ~ </span>
-                        <input type="text" class="form-control" id="edate1" style="width: 115px; border-radius: 3px 0 0 3px;" />
+                        <input name="hight_grad_date" type="text" class="form-control" id="edate1" style="width: 115px; border-radius: 3px 0 0 3px;" {% if myPage %} value={{myPage.high_grad_date}} {% endif %}/>
                         <label class="date-range" for="edate1">
                         <i class="glyphicon glyphicon-calendar"></i>
                         </label>
                     </div>
                     <br>
-                    <label for="">대학교</label>
-                    <input type="text" class="form-control" placeholder="Univ.">  
-                    <label for="">주전공</label>
-                    <input type="text" class="form-control" placeholder="Major">  
-                    <label for="">복수, 부전공</label>
-                    <input type="text" class="form-control" placeholder="sub_Major">  
+                    <label>대학교</label>
+                    <input name="univ_name" type="text" class="form-control" placeholder="Univ." {% if myPage %} value={{myPage.univ_name}} {% endif %}>  
+                    <label>주전공</label>
+                    <input name="major_name" type="text" class="form-control" placeholder="Major" {% if myPage %} value={{myPage.major_name}} {% endif %}>  
+                    <label>복수, 부전공</label>
+                    <input name="sub_major_name" type="text" class="form-control" placeholder="sub_Major" {% if myPage %} value={{myPage.sub_major_name}} {% endif %}>  
+                    <!--
                     <div class="form-group">
                         <label for="expireDate" style="padding-right: 15px;">대학교 입학, 졸업일 </label>
                         <div class="input-daterange date" id="datepicker1" style="width: 320px; display: inline-table;">
-                        <input type="text" class="form-control" id="sdate1" style="width: 115px;" />
+                        <input name="univ_adm_date" type="text" class="form-control" id="sdate1" style="width: 115px;" {% if myPage %} value={{myPage.univ_adm_date}} {% endif %}/>
                         <label class="date-range" for="sdate1">
                         <i class="glyphicon glyphicon-calendar"></i>
                         </label>
                         <span style="display: table-cell; padding: 0px 10px;"> ~ </span>
-                        <input type="text" class="form-control" id="edate1" style="width: 115px; border-radius: 3px 0 0 3px;" />
+                        <input name="univ_grad_date" type="text" class="form-control" id="edate1" style="width: 115px; border-radius: 3px 0 0 3px;" {% if myPage %} value={{myPage.univ_grad_date}} {% endif %}/>
                         <label class="date-range" for="edate1">
                         <i class="glyphicon glyphicon-calendar"></i>
                         </label>
-                    </div>  
+                    </div>
+                    -->  
                 </div>   
             </div>
             <hr>
-            <button type="submit" class="btn btn-primary">저장</button>
+            <button type="submit" class="btn btn-primary float-right">저장</button>
         </form>
+        <br><br>
         <form action="{% url 'mypage:add' user.get_username %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="inputState">질문 목록</label>
-                <select id="inputState" class="form-control" name="question_id">
-                    <option selected value="1">입사한 후에 할 일</option>
-                    <option value="2">가장 인상 깊었던 프로젝트</option>
-                    <option value="3">가장 영향을 미친 인물</option>
-                    <option value="4">자신이 가장 창의적이었다고 생각하는 경험</option>
+                <select id="inputState" class="form-control" name="question_list_id">
+                    {% for question in question_list %}
+                        {% if question.id not in questions %}
+                        <option value="{{ question.id }}">{{question.question_title}}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
+                <label for="inputState">질문 글자수</label>
+                <input type="text" name="question_num" value="3000" />
             </div>
-            <button type="submit" class="btn btn-primary">추가</button>
+            <button type="submit" class="btn btn-primary float-right">추가</button>
         </form>
             {%for question in myPage.question_set.all %}
                 <p>{{question.question_title}}</p>

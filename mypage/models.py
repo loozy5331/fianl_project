@@ -40,6 +40,13 @@ class MyPage(models.Model):
     def __str__(self):
         return "id : {}, name : {}, age : {}".format(self.id, self.name, self.age)
 
+class Question_List(models.Model):
+    question_title = models.CharField(max_length=200)
+    question_num = models.PositiveIntegerField(default=2000)
+
+    def __str__(self):
+        return str(self.question_title)
+
 class Question(models.Model):
     """
     myPage = mypage
@@ -49,6 +56,7 @@ class Question(models.Model):
     question_text_num = 답변 길이 제한
     """
     myPage = models.ForeignKey(MyPage, on_delete=models.CASCADE)
+    question_list_id = models.IntegerField(default=0)
     question_title = models.CharField(max_length=200)
     question_text = models.TextField()
     #question_text_file = models.FileField(upload_to="question_log/{}".format(self.id))

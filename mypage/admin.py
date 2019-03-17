@@ -6,7 +6,6 @@ class MyPageAdmin(admin.ModelAdmin):
     list_filter = ['univ_name', 'major_name']
     search_field = ['text', 'name']
 
-
-
 admin.site.register(MyPage, MyPageAdmin)
 admin.site.register(Question)
+admin.site.register(Question_List)
