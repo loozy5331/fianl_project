@@ -11,28 +11,14 @@ def createView(request, user_name):
     myPage = MyPage.objects.get(user_name=user_name)
     return render(request, 'mypage/mypage_create.html', {'myPage':myPage})
 
-class MyPageCreateView(CreateView):
-    model = MyPage
-    fields = ['name', 'age', 'high_school_name', 'high_adm_date', 'high_grad_date',
-        'univ_name', 'major_name', 'sub_major_name', 'univ_adm_date', 'univ_grad_date']
-    template_name_suffix = '_create'
+def addQuestionView(request, user_name):
+    question = Question(myPage=MyPage.objects.get(user_name=user_name),
+                        question_title="hello world!",
+                        question_text="content",
+                        question_text_num=2000)
+    print(request.POST['question_id'])
+    question.save()
+    return redirect('/')
 
-    def form_valid(self, form):
-        form.instance.mypage_id = self.request.user.id
-        if form.is_valid():
-            form.instance.save()
-            return redirect('mypage:mypage')
-        else:
-            return self.render_to_response({'form':form})
-
-class QuestionDeleteView(DeleteView):
-    model = Question
-    success_url = 'mypage:mypage'
-    template_name = 'mypage/delete.html'
-
-class QuestionUpdateView(UpdateView):
-    models = Question
-    fields = ['question_text', 'question_text_num']
-    template_name = 'mypage/update.html'
 
 

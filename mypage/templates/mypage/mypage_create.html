@@ -52,20 +52,23 @@
                 </div>   
             </div>
             <hr>
-            <div class="form-group">
-                    <label for="inputState">질문 목록</label>
-                    <select id="inputState" class="form-control">
-                    <option selected>입사한 후에 할 일</option>
-                    <option>가장 인상 깊었던 프로젝트</option>
-                    <option>가장 영향을 미친 인물</option>
-                    <option>자신이 가장 창의적이었다고 생각하는 경험</option>
-                    </select>
-            </div>
-            <div class="clearfix">
-                <a class="btn btn-primary float-right" href="#">추가</a>
-            </div>
-            <a>{{myPage.name}}</a>
             <button type="submit" class="btn btn-primary">저장</button>
         </form>
+        <form action="{% url 'mypage:add' user.get_username %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="inputState">질문 목록</label>
+                <select id="inputState" class="form-control" name="question_id">
+                    <option selected value="1">입사한 후에 할 일</option>
+                    <option value="2">가장 인상 깊었던 프로젝트</option>
+                    <option value="3">가장 영향을 미친 인물</option>
+                    <option value="4">자신이 가장 창의적이었다고 생각하는 경험</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">추가</button>
+        </form>
+            {%for question in myPage.question_set.all %}
+                <p>{{question.question_title}}</p>
+            {% endfor %}
 </div>
 {% endblock %}
